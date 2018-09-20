@@ -1,0 +1,12 @@
+# FUNCTIONALITEIT #
+2) Robots automatisch laten spelen
+	a) aangeven welke kaart gespeeld kan worden
+	c) als speler aan de beurt is, dit aangeven
+	b) kaart van robot automatisch laten spelen
+
+# CODE VERBETERINGEN #
+
+# BUGS #
+
+
+

@@ -1,0 +1,278 @@
+
+@import url(http://fonts.googleapis.com/css?family=Prosto+One);
+
+/* RESET */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline; }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {	display: block;}
+body {	line-height: 1;}
+ol, ul {	list-style: none;}
+blockquote, q {	quotes: none;}
+blockquote:before, blockquote:after,
+q:before, q:after {	content: '';	content: none;}
+table {	border-collapse: collapse;	border-spacing: 0;}
+h1, h2, h3, h4, h5, h6, button, input { -webkit-font-smoothing: antialiased; }
+
+/* Responsive */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* GRID */
+.row {
+	width: 100%; overflow: hidden;
+}
+
+.column {
+	padding: 1em;
+	float: left;
+}
+
+.column.one-fourth {
+	width: 25%;
+}
+.column.three-fourth {
+	width: 75%;
+}
+
+/* STYLING */
+#startForm {  width: 1440px; height: auto; margin: 0 auto 40px; }
+#startForm label { display: block; float: left; margin: 0 0 20px; clear: left; width: 200px; font: 16px 'Prosto One', cursive;  }
+#startForm input, select { display: block; float: left; margin-left: 20px; font: 16px 'Prosto One', cursive;  }
+#startForm #startGame {
+	display: block;
+	clear: both;
+	width: 120px;
+	height: 30px;
+	padding: 4px 0 0 0;
+	text-align:center;
+	background: #000;
+	color: #fff;
+	font: 16px 'Prosto One', cursive;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#messages { border: 1px solid red; width: 1440px; height: auto; margin: 0 auto 20px; padding:1em; overflow:hidden; }
+#messages .widowhand { margin-top: 20px; }
+#messages .confirm, #messages .cancel {
+	width: 120px;
+	height: 30px;
+	text-align:center;
+	background: #fff;
+	border:2px solid #000;
+	color: #000;
+	font: 16px 'Prosto One', cursive;
+	margin-left: 20px;
+	cursor: pointer;
+}
+
+#round-number { font-size: 36px; font-weight: bold; }
+
+#rummoli {
+	overflow: hidden; background: #ccc; width: 1440px; height: auto; margin: 0 auto; opacity: 1; transition: opacity .5s;
+}
+#rummoli.hide {
+  opacity: 0; transition: opacity .5s;
+}
+
+h1 {
+	font: 24px 'Prosto One', cursive; background: orange; color: #fff; padding: .5em; margin: 0 0 1em 0;
+}
+h3 { 
+	font: 20px 'Prosto One', cursive; 
+}
+h4 { 
+	font: 18px 'Prosto One', cursive; 
+}
+
+#aflegstapel li {display: inline; padding-right: 1em; }
+
+#board {
+	float:right;
+	width:590px; 
+	height:590px; 
+	background:url(../images/board.gif) left top no-repeat;
+	position:relative;
+}
+
+#round-number {
+	position:absolute;
+	top: 80px;
+	left: 240px;
+	font: 24px 'Prosto One', cursive;
+}
+
+.pot {
+	position: absolute;
+	font: 22px 'Prosto One', cursive;
+	border:2px solid #000;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	padding: 4px 0 0 0;
+}
+#pot10 {
+	top: 160px;
+	right: 170px;
+}
+#potJ {
+	top: 270px;
+	right: 140px;
+}
+#potQ {
+	bottom: 160px;
+	right: 170px;
+}
+#potK {
+	bottom: 140px;
+	left: 275px;
+}
+#potA {
+	left: 170px;
+	bottom: 160px;
+}
+#potAK {
+	top: 270px;
+	left: 140px;
+}
+#pot789 {
+	top: 160px;
+	left: 170px;
+}
+#rummoliPot {
+	top: 275px;
+	left: 275px;
+}
+#pokerPot {
+	top: 140px;
+	left: 275px;
+	color: #ccc;
+	border-color: #ccc;
+}
+
+/* players */
+#players { width: 850px; float:left; padding: 10px; }
+#players > div { margin-bottom: 1em; }
+div#players [id^=hand] { clear:both; margin-bottom: 20px; overflow: hidden; }
+#messages .widowHand span,
+#players div[id^=hand] a { margin-right: 1em; font-weight: bold; }
+#players div[id^=hand] a { cursor: pointer; }
+#players h3 { clear:left; float:left; padding: 8px 0 0 6px; }
+#players h4 { 
+	background: #fff; 
+	border-radius: 50%; 
+	width:40px; 
+	height:40px; 
+	margin-bottom:6px; 
+	float:right; 
+	padding: 9px 0 0 0;
+	text-align: center; 
+}
+#players span.dealer {
+	display:block;
+	background: #000;
+	border-radius: 50%;
+	color: #fff;
+	float:right;
+	width:40px; 
+	height: 40px; 
+	margin-bottom:6px;
+	margin-right: 12px;
+	padding: 9px 0 0 0;
+	text-align: center;
+	font:bold 18px 'Prosto One', cursive;
+} 
+#players #player4 { /* widowhand */
+	border-top: 2px solid #000;
+	display: none;
+}
+
+
+/* CARDS : */
+div#players [id^=hand] a,
+#messages .widowHand span {
+	width:72px; 
+	height:106px; 
+	background-color:#fff;
+	background-image:url(../images/deck.png); 
+	background-repeat:no-repeat; 
+	float:left; 
+	margin:0 5px; 
+	border:1px solid #ccc;
+	border-radius: 8px;
+	text-indent: -500em;
+	overflow: hidden;
+}
+
+.d14 { background-position:-952px -1px; }
+.d13 { background-position:-874px -1px; }
+.d12 { background-position:-794px -1px; }
+.d11 { background-position:-715px -1px; }
+.d10 { background-position:-635px -1px; }
+.d9  { background-position:-556px -1px; }
+.d8  { background-position:-476px -1px; }
+.d7  { background-position:-397px -1px; }
+.d6  { background-position:-317px -1px; }
+.d5  { background-position:-238px -1px; }
+.d4  { background-position:-159px -1px; }
+.d3  { background-position:-80px  -1px; }
+.d2  { background-position:-1px   -1px; }
+
+.c14 { background-position:-952px -112px; }
+.c13 { background-position:-874px -112px; }
+.c12 { background-position:-794px -112px; }
+.c11 { background-position:-715px -112px; }
+.c10 { background-position:-635px -112px; }
+.c9  { background-position:-556px -112px; }
+.c8  { background-position:-476px -112px; }
+.c7  { background-position:-397px -112px; }
+.c6  { background-position:-317px -112px; }
+.c5  { background-position:-238px -112px; }
+.c4  { background-position:-159px -112px; }
+.c3  { background-position:-80px  -112px; }
+.c2  { background-position:-1px   -112px; }
+
+.h14 { background-position:-952px -224px; }
+.h13 { background-position:-874px -224px; }
+.h12 { background-position:-794px -224px; }
+.h11 { background-position:-715px -224px; }
+.h10 { background-position:-635px -224px; }
+.h9  { background-position:-556px -224px; }
+.h8  { background-position:-476px -224px; }
+.h7  { background-position:-397px -224px; }
+.h6  { background-position:-317px -224px; }
+.h5  { background-position:-238px -224px; }
+.h4  { background-position:-159px -224px; }
+.h3  { background-position:-80px  -224px; }
+.h2  { background-position:-1px   -224px; }
+
+.s14 { background-position:-952px -336px; }
+.s13 { background-position:-874px -336px; }
+.s12 { background-position:-794px -336px; }
+.s11 { background-position:-715px -336px; }
+.s10 { background-position:-635px -336px; }
+.s9  { background-position:-556px -336px; }
+.s8  { background-position:-476px -336px; }
+.s7  { background-position:-397px -336px; }
+.s6  { background-position:-317px -336px; }
+.s5  { background-position:-238px -336px; }
+.s4  { background-position:-159px -336px; }
+.s3  { background-position:-80px  -336px; }
+.s2  { background-position:-1px   -336px; }
+
