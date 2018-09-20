@@ -1,0 +1,56 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>Rummoli</title>
+	 <meta charset="UTF-8">
+	<link rel="stylesheet" href="css/newstyle.css" />
+</head>
+
+<body>
+
+<h1>Welkom bij Rummoli</h1>
+
+<form id="startForm" action="">
+	<label>What is your name?</label>
+	<input type="text" name="playerName" id="playerName" value="Milly" />
+	<br/>
+	<label>How many players?</label>
+	<select name="numberOfPlayers" id="numberOfPlayers" />
+		<option value="">Select number of players</option>
+	</select>
+	<br/>
+	<a href="rummoli.html" id="startGame">Start game</a>
+</form>
+
+<script type="text/javascript">
+
+(function (){
+
+	// init number of players
+	var newOption = new Option("4");
+	numberOfPlayers.add(newOption, numberOfPlayers.options[numberOfPlayers.options.length]);
+
+	// click start button & start game
+	var btn = document.getElementById("startGame");
+	btn.addEventListener("click", initGame, false);
+
+	function initGame(e) {
+		e.preventDefault();
+		var form = document.getElementById('startForm');
+		if ( form.playerName.value === "" ) {
+				form.playerName.focus();
+		} else if ( numberOfPlayers.value === "" ) {
+				form.numberOfPlayers.focus();
+		} else {
+			localStorage.playerName = form.playerName.value;
+			localStorage.numberOfPlayers = form.numberOfPlayers.value;
+			window.location = e.target.href;
+		}
+	}
+
+})();
+
+</script>
+
+</body>
+</html>

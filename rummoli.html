@@ -1,0 +1,231 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>Rummoli</title>
+	 <meta charset="UTF-8">
+	<link rel="stylesheet" href="css/newstyle.css" />
+	<script type="text/javascript" src="scripts/board.js"></script>
+	<script type="text/javascript" src="scripts/deck.js"></script>
+	<script type="text/javascript" src="scripts/pot.js"></script>
+	<script type="text/javascript" src="scripts/discardpilecard.js"></script>
+	<script type="text/javascript" src="scripts/round.js"></script>
+	<script type="text/javascript" src="scripts/card.js"></script>
+	<script type="text/javascript" src="scripts/player.js"></script>
+	<script type="text/javascript" src="scripts/presentor.js"></script>
+	<script type="text/javascript" src="scripts/rummoli.js"></script>
+
+	<script type="text/javascript">
+
+	function testPlayingCards(game) {
+
+		// test hand maken:
+		game.players[0].hand = []; game.players[1].hand = []; game.players[2].hand = []; game.players[3].hand = [];
+
+		game.players[0].hand.push(new Card(2,  "c")); // black
+		game.players[0].hand.push(new Card(3,  "c")); // black
+		game.players[0].hand.push(new Card(5,  "d")); // red
+		game.players[0].hand.push(new Card(6,  "s")); // black
+		game.players[0].hand.push(new Card(7,  "s")); // black
+
+		game.players[1].hand.push(new Card(4,  "c")); // black
+		game.players[1].hand.push(new Card(10, "d")); // red
+		game.players[1].hand.push(new Card(2,  "d")); // red
+		game.players[1].hand.push(new Card(2,  "h")); // red
+		game.players[1].hand.push(new Card(7,  "d")); // red
+		game.players[1].hand.push(new Card(9,  "d")); // red
+
+		game.players[2].hand.push(new Card(7,  "s")); // black
+		game.players[2].hand.push(new Card(12, "s")); // black
+		game.players[2].hand.push(new Card(9,  "h")); // red
+		game.players[2].hand.push(new Card(10, "s")); // black
+		game.players[2].hand.push(new Card(11, "c")); // black
+
+		game.players[3].hand.push(new Card(4, "s")); // black
+		game.players[3].hand.push(new Card(8, "c")); // black
+		game.players[3].hand.push(new Card(9, "c")); // black
+		game.players[3].hand.push(new Card(9, "c")); // black
+		game.players[3].hand.push(new Card(9, "c")); // black
+
+		// player 1 - play first card - lowest card
+		var x = game.playCard(game.players[0], 0); // player, cardIndex
+		if(x.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+		// player 1 - play second card - which is following with same player
+		var y = game.playCard(game.players[0], 0); // player, cardIndex
+		if(y.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+		// player 2 - play first card - which is following with other player
+		var z = game.playCard(game.players[1], 0); // player, cardIndex
+		if(z.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+		// player 2 - play second card - which is NOT playable cause not lowest
+		var bb = game.playCard(game.players[1], 0); // player, cardIndex
+		if(bb.success == true){
+			throw new Error("Verwacht success == false!");
+		}
+		// player 2 - play third card - which is lowest opposite color card with same player
+		var b = game.playCard(game.players[1], 1); // player, cardIndex
+		if(b.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+		// player 3 - play first card - which is lowest opposite color card with other player
+		var d = game.playCard(game.players[2], 0); // player, cardIndex
+		if(d.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+		// player 3 - play first card - which is lowest opposite color card with same player
+		var d = game.playCard(game.players[2], 1); // player, cardIndex
+		if(d.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+		// player 3 - play first card - which is lowest opposite color card with same player
+		var d = game.playCard(game.players[2], 1); // player, cardIndex
+		if(d.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+
+		// player 3 (index 2) is on turn
+		var playerOrder = testPlayerOrder(game);
+				if(playerOrder != "2301"){
+			throw new Error("Verwacht 2301!");
+		}
+
+		// player 3 heeft geen rood, player, player 4 heeft geen rood
+		// player 1 (index 0) heeft wel weer rood
+		var d = game.playCard(game.players[0], 0);
+		if(d.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+
+		// kaarten aanpassen tbv testen:
+		game.players[1].hand = [];
+		game.players[1].hand.push(new Card(4,  "c")); // black
+		game.players[0].hand = [];
+		game.players[0].hand.push(new Card(2,  "c")); // black
+		game.players[0].hand.push(new Card(6,  "s")); // black
+
+		// player 1 speel laagste zwarte kaart
+		var d = game.playCard(game.players[0], 0);
+		if(d.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+
+		// no one has the opposite color red
+		// player 1 (index 0) can play lowest black card
+		var d = game.playCard(game.players[0], 0);
+		if(d.success == false){
+			throw new Error("Verwacht success == true!");
+		}
+
+		// # END OF GAME
+	}
+
+	function testPlayerOrder(game) {
+		playerOrder = "";
+		game.forEachPlayerInOrder(function(player) {
+			playerOrder += player.index;
+		});
+		return playerOrder;
+	}
+
+	function testSpecialCards(game) {
+
+		// test hand maken:
+		game.players[0].hand = []; game.players[1].hand = []; game.players[2].hand = []; game.players[3].hand = [];
+
+
+		game.players[0].hand.push(new Card(13,  "d"));
+		game.players[0].hand.push(new Card(14,  "d"));
+		game.players[0].hand.push(new Card(14,  "h"));
+		game.players[0].hand.push(new Card(9, "c"));
+
+		game.players[1].hand.push(new Card(10,  "s"));
+		game.players[1].hand.push(new Card(11,  "c"));
+
+
+		game.players[2].hand.push(new Card(11,  "s"));
+		game.players[2].hand.push(new Card(7,  "h"));
+		game.players[2].hand.push(new Card(8,  "h"));
+		game.players[2].hand.push(new Card(9,  "h"));
+		game.players[2].hand.push(new Card(13,  "h"));
+
+		
+		game.players[3].hand.push(new Card(11,  "h"));
+
+		// draw test hands:
+		var presentor = new Presentor(game);
+		presentor.draw();
+
+		// // player 1 starts with lowest card ruiten Koning
+		// var d = game.playCard(game.players[0], 0); // player, cardIndex
+		// if(d.success == false){
+		// 	throw new Error("Verwacht success == true!");
+		// }
+		//
+		// // player 1 plays following card ruiten Aas
+		// var e = game.playCard(game.players[0], 0);
+		// if(e.success == false){
+		// 	throw new Error("Verwacht success == true!");
+		// }
+		//
+		// // player 2 plays following card schoppen Tien (lowest opposite color card)
+		// var e = game.playCard(game.players[1], 0);
+		// if(e.success == false){
+		// 	throw new Error("Verwacht success == true!");
+		// }
+		// // player 2 plays three cards (7-8-9-h) (lowest opposite color card)
+		// var e = game.playCard(game.players[2], 1);
+		// if(e.success == false){
+		// 	throw new Error("Verwacht success == true!");
+		// }
+		// var e = game.playCard(game.players[2], 1);
+		// if(e.success == false){
+		// 	throw new Error("Verwacht success == true!");
+		// }
+		// var e = game.playCard(game.players[2], 1);
+		// if(e.success == false){
+		// 	throw new Error("Verwacht success == true!");
+		// }
+	}
+
+	function initDemoGame(){
+				
+		var game = new Rummoli(localStorage.numberOfPlayers, localStorage.playerName),
+			discardPile = game.discardPile,
+			presentor = new Presentor(game);
+		
+		return game;		
+	}
+
+	</script>
+</head>
+<body>
+
+<h1>Rummoli</h1>
+
+<div id="messages"></div>
+
+<div id="rummoli">
+	<div id="players"></div>
+	<div id="board"></div>
+	<ul id="aflegstapel"></ul>
+</div>
+
+<script type="text/javascript">
+
+(function (){
+
+	// initialize DEMO game
+	var game = initDemoGame();
+	
+	//testSpecialCards(game);
+
+})();
+
+</script>
+
+</body>
+</html>
